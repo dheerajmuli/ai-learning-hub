@@ -150,6 +150,19 @@ const projectData = {
                 <li><code>train.py</code>: Handles gradient penalties, alternates updates (5 Critic steps per 1 Generator step), and saves weights.</li>
                 <li><code>app.py</code>: Streamlit app calculating Linear Interpolations (LERP) between latent vectors in real-time.</li>
             </ul>
+
+            <h4>📈 Training Findings & Outputs</h4>
+            <p>Once you train the network, the training loss curves and generated artwork will be dynamically rendered below straight from your GitHub repository:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 24px 0;">
+                <div style="background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; text-align: center;" onerror="this.style.display='none'">
+                    <h5 style="margin-bottom: 10px; color: var(--accent-cyan);">WGAN-GP Loss Curves</h5>
+                    <img src="https://raw.githubusercontent.com/dheerajmuli/neurosketch-gans/main/outputs/loss_curves.png" alt="WGAN-GP Loss Curves" style="width: 100%; border-radius: 4px; border: 1px solid var(--border-color);" onerror="this.parentElement.style.display='none'">
+                </div>
+                <div style="background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; text-align: center;" onerror="this.style.display='none'">
+                    <h5 style="margin-bottom: 10px; color: var(--accent-purple-hover);">Synthesized Canvas Art</h5>
+                    <img src="https://raw.githubusercontent.com/dheerajmuli/neurosketch-gans/main/outputs/neurosketch_final_artwork.png" alt="Synthesized Canvas Art" style="width: 100%; border-radius: 4px; border: 1px solid var(--border-color);" onerror="this.parentElement.style.display='none'">
+                </div>
+            </div>
         `
     },
     deeptrader: {
