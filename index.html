@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Learning Hub - A personal portfolio and learning journal tracking my journey and progress in Machine Learning, Deep Learning, and Artificial Intelligence.">
+    <title>AI Learning Hub | Machine Learning Portfolio & Blog</title>
+    
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background Glows -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <!-- Navigation Header -->
+    <header class="site-header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
+                <span class="logo-text">AI Learning Hub</span>
+            </a>
+            <nav class="main-nav" aria-label="Main Navigation">
+                <ul>
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#blog" class="nav-link">Journal</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <a href="https://github.com/dheerajmuli" target="_blank" rel="noopener noreferrer" class="btn btn-icon" aria-label="GitHub Profile">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="#blog" class="btn btn-primary btn-sm">Read Journal</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="learning-status">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Currently Learning: Transformer Architectures & RL</span>
+                    </div>
+                    <h1 class="hero-title">Tracking My Journey in <span class="gradient-text">Artificial Intelligence</span></h1>
+                    <p class="hero-subtitle">
+                        Welcome to my AI Hub. Here, I document my experiments, share structured notes, and showcase hands-on machine learning projects as I transition from foundational mathematics to state-of-the-art architectures.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#projects" class="btn btn-gradient">Explore Projects</a>
+                        <a href="#blog" class="btn btn-outline">Read Learning Journal</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="visual-card">
+                        <div class="card-inner">
+                            <div class="code-header">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                                <span class="file-name">train_agent.py</span>
+                            </div>
+                            <pre class="code-body"><code><span class="keyword">import</span> torch
+<span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+
+<span class="comment"># Define a simple policy network</span>
+<span class="keyword">class</span> <span class="class-name">PolicyNetwork</span>(nn.Module):
+    <span class="keyword">def</span> <span class="function-name">__init__</span>(self, state_dim, action_dim):
+        super().__init__()
+        self.network = nn.Sequential(
+            nn.Linear(state_dim, <span class="number">128</span>),
+            nn.ReLU(),
+            nn.Linear(<span class="number">128</span>, action_dim),
+            nn.Softmax(dim=-<span class="number">1</span>)
+        )
+        
+    <span class="keyword">def</span> <span class="function-name">forward</span>(self, state):
+        <span class="keyword">return</span> self.network(state)
+
+print(<span class="string">"Agent compiled successfully!"</span>)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#projects" aria-label="Scroll to Projects"><i class="fa-solid fa-chevron-down"></i></a>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured AI Projects</h2>
+                    <p class="section-subtitle">A collection of neural models, algorithm implementations, and datasets I have built.</p>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- Project Card 1 -->
+                    <article class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="assets/project1.png" alt="Generative neural art project visualization" class="project-image" loading="lazy">
+                            <div class="project-overlay">
+                                <a href="https://github.com/dheerajmuli/neurosketch-gans" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="project-link-btn" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag tag-cyan">Python</span>
+                                <span class="tag tag-purple">GANs</span>
+                                <span class="tag tag-green">PyTorch</span>
+                            </div>
+                            <h3 class="project-card-title">NeuroSketch: Generative Art</h3>
+                            <p class="project-card-description">
+                                A generative adversarial network trained on abstract expressionist datasets to generate original high-resolution neural digital paintings. Features custom loss functions.
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 2 -->
+                    <article class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="assets/project2.png" alt="RL Trading agent dashboard visualization" class="project-image" loading="lazy">
+                            <div class="project-overlay">
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="project-link-btn" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag tag-cyan">RL</span>
+                                <span class="tag tag-purple">Gymnasium</span>
+                                <span class="tag tag-green">Q-Learning</span>
+                            </div>
+                            <h3 class="project-card-title">DeepTrader: Portfolio Optimization</h3>
+                            <p class="project-card-description">
+                                A deep reinforcement learning agent designed to optimize stock portfolio weight allocations under market volatility, utilizing custom Proximal Policy Optimization (PPO).
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Project Card 3 -->
+                    <article class="project-card">
+                        <div class="project-image-wrapper">
+                            <img src="assets/project3.png" alt="NLP vector clusters visualization" class="project-image" loading="lazy">
+                            <div class="project-overlay">
+                                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link-btn" aria-label="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" class="project-link-btn" aria-label="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div class="project-tags">
+                                <span class="tag tag-cyan">NLP</span>
+                                <span class="tag tag-purple">Transformers</span>
+                                <span class="tag tag-green">HuggingFace</span>
+                            </div>
+                            <h3 class="project-card-title">SentientNLP: Fine-tuned Sentiment</h3>
+                            <p class="project-card-description">
+                                A custom-trained transformer model fine-tuned on customer support text streams. Achieves 94.2% accuracy in multi-class emotional sentiment classifications.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog / Learning Journal Section -->
+        <section id="blog" class="blog-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">AI Learning Journal</h2>
+                    <p class="section-subtitle">Documenting concepts, breakthroughs, and my daily progress in mastering AI.</p>
+                </div>
+
+                <div class="blog-list">
+                    <!-- Blog Item 1 -->
+                    <article class="blog-item">
+                        <div class="blog-meta">
+                            <time datetime="2026-05-24" class="blog-date">May 24, 2026</time>
+                            <span class="blog-read-time"><i class="fa-regular fa-clock"></i> 6 min read</span>
+                        </div>
+                        <div class="blog-content-preview">
+                            <span class="journal-status status-completed">Completed</span>
+                            <h3 class="blog-title">Demystifying Self-Attention in Transformer Models</h3>
+                            <p class="blog-snippet">
+                                Understanding how transformers map tokens dynamically through Queries, Keys, and Values. Self-attention is the secret sauce that allows modern LLMs to capture long-range dependencies in text. Let's break down the dot-product attention formula step-by-step and code a mini attention head from scratch.
+                            </p>
+                            <button class="btn btn-text read-more-btn" data-blog-id="transformers">
+                                Read More <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Blog Item 2 -->
+                    <article class="blog-item">
+                        <div class="blog-meta">
+                            <time datetime="2026-05-18" class="blog-date">May 18, 2026</time>
+                            <span class="blog-read-time"><i class="fa-regular fa-clock"></i> 8 min read</span>
+                        </div>
+                        <div class="blog-content-preview">
+                            <span class="journal-status status-progress">In Progress</span>
+                            <h3 class="blog-title">My First Reinforcement Learning Agent: Q-Learning in Gym</h3>
+                            <p class="blog-snippet">
+                                Deep dive into Markov Decision Processes (MDPs) and the exploration vs. exploitation trade-off. I implemented a classic Q-learning agent to navigate frozen lake grids and taxicab paths. Here is what I learned about tuning reward structures and epsilon-decay rates.
+                            </p>
+                            <button class="btn btn-text read-more-btn" data-blog-id="qlearning">
+                                Read More <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Blog Item 3 -->
+                    <article class="blog-item">
+                        <div class="blog-meta">
+                            <time datetime="2026-05-10" class="blog-date">May 10, 2026</time>
+                            <span class="blog-read-time"><i class="fa-regular fa-clock"></i> 5 min read</span>
+                        </div>
+                        <div class="blog-content-preview">
+                            <span class="journal-status status-concept">Concept</span>
+                            <h3 class="blog-title">Fine-Tuning a Custom Llama-3 Model for Coding Tasks</h3>
+                            <p class="blog-snippet">
+                                How parameter-efficient fine-tuning (PEFT) and LoRA allow developers to customize large models on consumer-grade hardware. I outline my training configurations, loss curves, and the evaluation benchmarks I used to ensure code syntax correctness.
+                            </p>
+                            <button class="btn btn-text read-more-btn" data-blog-id="finetuning">
+                                Read More <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-icon"><i class="fa-solid fa-brain"></i></span>
+                    <span class="logo-text">AI Learning Hub</span>
+                </a>
+                <p class="footer-desc">Building hands-on neural connections, one project at a time.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Sections</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Journal</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4>Connect</h4>
+                <div class="social-icons">
+                    <a href="https://github.com/dheerajmuli" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 AI Learning Hub. All rights reserved. Created with <i class="fa-solid fa-heart" style="color: var(--accent-cyan);"></i> for Machine Learning.</p>
+        </div>
+    </footer>
+
+    <!-- Accessible Modal System Overlay -->
+    <div id="blog-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-container" tabIndex="-1">
+            <button class="modal-close-btn" id="modal-close" aria-label="Close modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-scroll-content">
+                <div class="modal-header">
+                    <div class="modal-meta">
+                        <time id="modal-date" class="blog-date"></time>
+                        <span id="modal-read-time" class="blog-read-time"></span>
+                        <span id="modal-status" class="journal-status"></span>
+                    </div>
+                    <h2 id="modal-title" class="modal-post-title"></h2>
+                </div>
+                <div class="modal-body-wrapper">
+                    <div id="modal-image-container" class="modal-featured-image-wrapper">
+                        <!-- Injected via JavaScript -->
+                    </div>
+                    <div id="modal-body-content" class="modal-rich-text">
+                        <!-- Injected via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
