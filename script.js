@@ -270,7 +270,7 @@ function closeModal() {
     }
 
     // Clean up event listeners
-    document.remove('keydown', handleKeyDown);
+    document.removeEventListener('keydown', handleKeyDown);
 }
 
 // Intercepts Keyboard keys for Modal navigation (Accessibility Focus Trap & Escape Close)
