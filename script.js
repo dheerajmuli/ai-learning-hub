@@ -120,6 +120,83 @@ const blogData = {
 };
 
 // ==========================================================================
+// PROJECTS DATABASE (Rich text content for project card details)
+// ==========================================================================
+const projectData = {
+    neurosketch: {
+        title: "NeuroSketch: Generative Art (WGAN-GP)",
+        date: "Deep Learning Model",
+        readTime: "Completed",
+        status: "PyTorch & PIL",
+        statusClass: "status-completed",
+        image: "assets/project1.png",
+        content: `
+            <p><strong>NeuroSketch</strong> is a generative adversarial machine learning project that implements a **Wasserstein GAN with Gradient Penalty (WGAN-GP)** to synthesize abstract digital paintings.</p>
+            
+            <h4>What It Does</h4>
+            <p>The model learns the patterns of overlapping geometries, color blends, and organic splines. Instead of relying on a pre-downloaded dataset, the code contains a procedural image engine that renders infinite canvases on-the-fly. The project includes a Streamlit interface where users can morph between paintings in real-time by interpolating the 100-dimensional latent space.</p>
+            
+            <h4>How It Works</h4>
+            <ul>
+                <li><strong>Stable Training (Wasserstein Loss)</strong>: Standard GANs suffer from vanishing gradients and mode collapse. WGAN-GP fixes this by optimizing the Earth Mover's Distance, which measures the work needed to morph the generated distribution into the real distribution.</li>
+                <li><strong>Gradient Penalty (GP)</strong>: Stabilizes the network by penalizing the Critic if the norm of its gradients deviates from 1, enforcing 1-Lipschitz continuity.</li>
+                <li><strong>Network Architectures</strong>: The Generator uses Transposed Convolutions (<code>ConvTranspose2d</code>), Batch Normalization, and ReLU layers. The Critic uses 2D Convolutions with Layer Normalization (using GroupNorm) and LeakyReLU activations.</li>
+            </ul>
+            
+            <h4>Technical Stack & File Roles</h4>
+            <ul>
+                <li><code>dataset.py</code>: Renders custom bezier shapes, gradients, and blurs in memory, outputting normalized tensors.</li>
+                <li><code>model.py</code>: Implements Generator and Critic network layouts.</li>
+                <li><code>train.py</code>: Handles gradient penalties, alternates updates (5 Critic steps per 1 Generator step), and saves weights.</li>
+                <li><code>app.py</code>: Streamlit app calculating Linear Interpolations (LERP) between latent vectors in real-time.</li>
+            </ul>
+        `
+    },
+    deeptrader: {
+        title: "DeepTrader: Reinforcement Learning Portfolio Optimizer",
+        date: "Reinforcement Learning",
+        readTime: "Active",
+        status: "Gymnasium & PPO",
+        statusClass: "status-progress",
+        image: "assets/project2.png",
+        content: `
+            <p><strong>DeepTrader</strong> is a deep reinforcement learning trading agent trained to optimize stock and crypto portfolio allocations under high volatility.</p>
+            
+            <h4>What It Does</h4>
+            <p>The agent rebalances asset weights dynamically, seeking to maximize the risk-adjusted Sharpe Ratio while accounting for transaction fees, slippage, and delays.</p>
+            
+            <h4>How It Works</h4>
+            <ul>
+                <li><strong>Proximal Policy Optimization (PPO)</strong>: Uses actor-critic methods to ensure stable learning updates in continuous action spaces.</li>
+                <li><strong>State Inputs</strong>: Takes rolling historical returns, moving averages, relative strength index (RSI), and sentiment indicators.</li>
+                <li><strong>Custom MDP Environment</strong>: Built a custom Gymnasium interface simulating database ledgers and asset price updates.</li>
+            </ul>
+        `
+    },
+    sentientnlp: {
+        title: "SentientNLP: Fine-tuned Sentiment Classifier",
+        date: "Natural Language Processing",
+        readTime: "Completed",
+        status: "Transformers & FastAPI",
+        statusClass: "status-completed",
+        image: "assets/project3.png",
+        content: `
+            <p><strong>SentientNLP</strong> is a custom-trained transformer model fine-tuned on customer conversation logs to classify emotional states.</p>
+            
+            <h4>What It Does</h4>
+            <p>Parses live chat logs, scoring messages across emotional indices (e.g., frustration, satisfaction, confusion). It maintains a 94.2% accuracy rate on test communication streams.</p>
+            
+            <h4>How It Works</h4>
+            <ul>
+                <li><strong>Transformer Fine-tuning</strong>: Fine-tuned a RoBERTa-base model using LoRA adapters.</li>
+                <li><strong>Data Augmentation</strong>: Leveraged back-translation techniques to expand sparse emotional categories.</li>
+                <li><strong>Microservices</strong>: Packaged inside Docker containers and exposed via a FastAPI REST endpoint.</li>
+            </ul>
+        `
+    }
+};
+
+// ==========================================================================
 // MODAL SYSTEM CONTROLLER
 // ==========================================================================
 const modal = document.getElementById('blog-modal');
@@ -134,22 +211,27 @@ const modalBodyContent = document.getElementById('modal-body-content');
 
 let lastFocusedElement = null;
 
-// Opens the Modal and loads the blog content
-function openModal(blogId) {
-    const post = blogData[blogId];
+// Opens the Modal and loads the content (supports both blog posts and projects)
+function openModal(itemId, type = 'blog') {
+    const post = (type === 'blog') ? blogData[itemId] : projectData[itemId];
     if (!post) return;
 
     // Save current active element for accessibility return
     lastFocusedElement = document.activeElement;
 
-    // Load content
-    modalDate.textContent = post.date;
-    modalReadTime.innerHTML = `<i class="fa-regular fa-clock"></i> ${post.readTime}`;
+    // Load content based on type
+    if (type === 'blog') {
+        modalDate.textContent = post.date;
+        modalReadTime.innerHTML = `<i class="fa-regular fa-clock"></i> ${post.readTime}`;
+        modalStatus.textContent = post.status;
+    } else {
+        // Projects metadata adjustments
+        modalDate.textContent = post.date; // Category / Type
+        modalReadTime.innerHTML = `<i class="fa-solid fa-code"></i> ${post.status}`; // Tech stack info
+        modalStatus.textContent = post.readTime; // Project status (Completed/Active)
+    }
     
-    // Status text & class reset
-    modalStatus.textContent = post.status;
     modalStatus.className = `journal-status ${post.statusClass}`;
-    
     modalTitle.textContent = post.title;
     
     // Load Image
@@ -225,12 +307,24 @@ function handleKeyDown(e) {
 
 // Setup Event Listeners
 function initModalSystem() {
-    // Event delegation for "Read More" buttons
+    // Event delegation for "Read More" buttons (Blogs)
     document.addEventListener('click', function(e) {
         const btn = e.target.closest('.read-more-btn');
         if (btn) {
             const blogId = btn.getAttribute('data-blog-id');
-            openModal(blogId);
+            openModal(blogId, 'blog');
+        }
+    });
+
+    // Event delegation for Project Cards (opens project details modal on click)
+    document.addEventListener('click', function(e) {
+        const card = e.target.closest('.project-card');
+        const linkBtn = e.target.closest('.project-link-btn');
+        
+        // If clicking the card but NOT clicking one of the direct external link buttons (GitHub / Demo)
+        if (card && !linkBtn) {
+            const projectId = card.getAttribute('data-project-id');
+            openModal(projectId, 'project');
         }
     });
 
